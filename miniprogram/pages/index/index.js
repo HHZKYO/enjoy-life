@@ -2,11 +2,15 @@
 // import utils from "../../utils/util"
 
 Page({
-  onLoad() {
+  async onLoad() {
     // 模块方式调用
     // utils.toast('页面加载完成')
 
     // 全局对象调用
-    wx.utils.toast('页面加载完成')
+    // wx.utils.toast('页面加载完成')
+
+    // 请求接口数据（全局方式调用）
+    const res = await wx.http.get('/announcement')
+    console.log(res)
   }
 })

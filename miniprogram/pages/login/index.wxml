@@ -5,7 +5,13 @@
 
 <view class="login-form">
   <van-cell-group border="{{false}}">
-    <van-field placeholder="请输入手机号码" type="number" use-button-slot placeholder-style="color: #979797">
+    <van-field
+      model:value="{{mobile}}"
+      placeholder="请输入手机号码"
+      type="number"
+      use-button-slot
+      placeholder-style="color: #979797"
+    >
       <view class="button-slot" slot="button">
         <text bind:tap="getSMSCode" wx:if="{{!countDownVisible}}">获取验证码</text>
         <van-count-down wx:else use-slot time="{{ 60000 }}" bind:change="countDownChange">

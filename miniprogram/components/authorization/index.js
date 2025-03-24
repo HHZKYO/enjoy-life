@@ -20,15 +20,15 @@ Component({
       // 获取登录状态
       const isLogin = !!getApp().token
       // 变更登录状态
-      this.setData({ isLogin })
+      this.setData({isLogin})
       // 获取页面栈
       const pageStack = getCurrentPages()
       // 获取页面路径
-      const currentPage = pageStack.pop()
+      const {route} = pageStack.pop()
       // 未登录状态下跳转到登录页
       if(!isLogin) {
         wx.redirectTo({
-          url: '/pages/login/index?redirectURL=/' + currentPage.route,
+          url: '/pages/login/index?redirectURL=/' + route,
         })
       }
     }

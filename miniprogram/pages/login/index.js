@@ -46,6 +46,7 @@ Page({
 
     // 调用接口获取验证码
     const {code, data} = await wx.http.get('/code', {mobile: this.data.mobile})
+    console.log({code, data})
 
     // 检测验证码是否发送成功
     if(code !== 10000) return wx.utils.toast('发送失败，稍后重试!')

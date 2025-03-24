@@ -15,6 +15,21 @@ Component({
     isLogin: false
   },
 
+  lifetimes: {
+    attached() {
+      // 获取登录状态
+      const isLogin = !!getApp().token
+      // 变更登录状态
+      this.setData({ isLogin })
+      // 未登录状态下跳转到登录页
+      if(!isLogin) {
+        wx.redirectTo({
+          url: '/pages/login/index',
+        })
+      }
+    }
+  },
+
   /**
    * 组件的方法列表
    */

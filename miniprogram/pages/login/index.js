@@ -65,7 +65,7 @@ Page({
     // 验证是否登录成功
     if(code !== 10000) return wx.utils.toast('登录失败，稍后重试!')
 
-    // 记录登录状态
+    // 记录登录状态，存储 token 数据
     app.setToken('token', data.token)
     app.setToken('refreshToken', data.refreshToken)
 

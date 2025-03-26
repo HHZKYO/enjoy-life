@@ -1,5 +1,5 @@
-  // 获取应用实例
-  const app = getApp()
+// 获取应用实例
+const app = getApp()
 
 Page({
   onLoad() {
@@ -13,6 +13,9 @@ Page({
     if(code !== 10000) return wx.utils.toast()
     // 渲染数据
     this.setData({avatar, nickName})
+
+    // 将头像和昵称存到应用实例中
+    app.userProfile = {avatar, nickName}
   },
   goLogin() {
     wx.navigateTo({

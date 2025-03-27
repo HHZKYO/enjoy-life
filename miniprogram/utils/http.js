@@ -17,7 +17,7 @@ http.intercept.request = function (options) {
 }
 
 // 配置响应拦截器
-http.intercept.response = async function ({data}) {
+http.intercept.response = async function ({data, config}) {
   // 如果状态码为401，则表明token已失效
   if (data.code === 401) {
     // 获取应用实例来读取 refreshToken
@@ -35,6 +35,17 @@ http.intercept.response = async function ({data}) {
     // 重新存储新的 token
     app.setToken('token', res.data.token)
     app.setToken('refreshToken', res.data.refreshToken)
+
+    // console.log(config)
+    // 1.2 获取到原来接口请求的参数
+    config = Object.assign(config, {
+      header: {
+        // 更新后的 token
+        Authorization: 'Bearer ' + res.data.token,
+      },
+    })
+    // 重新发请求
+    return http(config)
   }
   // 只保留 data 数据
   return data

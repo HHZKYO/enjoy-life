@@ -18,6 +18,12 @@ http.intercept.request = function (options) {
 
 // 配置响应拦截器
 http.intercept.response = function ({data}) {
+  // 如果状态码为401，则表明token已失效
+  if (data.code === 401) {
+    // 获取应用实例来读取 refreshToken
+    const app = getApp()
+    console.log(app.refreshToken)
+  }
   // 只保留 data 数据
   return data
 }

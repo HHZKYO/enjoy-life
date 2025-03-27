@@ -12,6 +12,7 @@ App({
   getToken() {
     // 读取本地的 token
     this.token = wx.getStorageSync('token')
+    this.refreshToken = wx.getStorageSync('refreshToken')
   },
   setToken(key, token) {
     // 将 token 记录在应用实例中   

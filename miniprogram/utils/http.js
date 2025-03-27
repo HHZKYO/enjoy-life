@@ -22,6 +22,19 @@ http.intercept.response = async function ({data, config}) {
   if (data.code === 401) {
     // 获取应用实例来读取 refreshToken
     const app = getApp()
+
+    // 状态为 401 且接口为 /refreshToken 表明 refreshToken 也过期了
+    if (config.url.includes('/refreshToken')) {
+      // 获取当前页面的路径，保证登录成功后能跳回到原来页面
+      const pageStack = getCurrentPages()
+      const currentPage = pageStack.pop()
+      const redirectURL = currentPage.route
+      // 跳由跳转（登录页面）
+      return wx.redirectTo({
+        url: '/pages/login/index?redirectURL=/' + redirectURL,
+      })
+    }
+
     // 调用接口获取新的 token
     const res = await http({
       url: '/refreshToken',

@@ -17,12 +17,24 @@ http.intercept.request = function (options) {
 }
 
 // 配置响应拦截器
-http.intercept.response = function ({data}) {
+http.intercept.response = async function ({data}) {
   // 如果状态码为401，则表明token已失效
   if (data.code === 401) {
     // 获取应用实例来读取 refreshToken
     const app = getApp()
-    console.log(app.refreshToken)
+    // 调用接口获取新的 token
+    const res = await http({
+      url: '/refreshToken',
+      method: 'POST',
+      header: {
+        Authorization: 'Bearer ' + app.refreshToken,
+      },
+    })
+    // 检测接口是否调用成功
+    if (res.code !== 10000) return wx.utils.toast('更新token失败!')
+    // 重新存储新的 token
+    app.setToken('token', res.data.token)
+    app.setToken('refreshToken', res.data.refreshToken)
   }
   // 只保留 data 数据
   return data

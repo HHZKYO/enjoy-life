@@ -11,6 +11,7 @@ Page({
 
     // 全局对象调用
     // wx.utils.toast('页面加载完成')
+    wx.utils.isTabBarPage()
 
     // 获取公告列表数据
     this.getNotices()

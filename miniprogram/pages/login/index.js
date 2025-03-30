@@ -11,9 +11,10 @@ Page({
     code: ''
   },
 
-  onLoad({redirectURL}) {
+  onLoad({redirectURL, routeType}) {
     // 获取地址参数
     this.redirectURL = redirectURL
+    this.routeType = routeType
   },
 
   rules: {
@@ -70,6 +71,6 @@ Page({
     app.setToken('refreshToken', data.refreshToken)
 
     // 重定向
-    wx.redirectTo({url: this.redirectURL})
+    wx[this.routeType]({url: this.redirectURL})
   }
 })

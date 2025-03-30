@@ -9,6 +9,21 @@ const utils = {
       mask: true,
       icon: 'none'
     })
+  },
+  /**
+   * 判断页面是否为 tabBar 页面
+   * @param {*} path 页面路径
+   */
+  isTabBarPage(path = '') {
+    // 获取 tabBar 页面信息
+    const tabBarList = __wxConfig.tabBar.list
+
+    // 获取 tabBar 页面的路径
+    const tabBarPages = tabBarList.map(({pagePath}) => {
+      return pagePath.split('.')[0]
+    })
+    // 是否为 tabBar 页面
+    return tabBarPages.includes(path)
   }
 }
 

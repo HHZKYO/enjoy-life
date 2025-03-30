@@ -29,9 +29,14 @@ http.intercept.response = async function ({data, config}) {
       const pageStack = getCurrentPages()
       const currentPage = pageStack.pop()
       const redirectURL = currentPage.route
+
+      // 判断 redirectURL 是不是 tabBar 页面
+      const isTabBarPage = wx.utils.isTabBarPage(redirectURL)
+      // 如果是则使用 wx.switchTab
+      const routeType = isTabBarPage ? 'switchTab' : 'redirectTo'
       // 跳由跳转（登录页面）
       return wx.redirectTo({
-        url: '/pages/login/index?redirectURL=/' + redirectURL,
+        url: `/pages/login/index?redirectURL=/${redirectURL}&routeType=${routeType}`
       })
     }
 

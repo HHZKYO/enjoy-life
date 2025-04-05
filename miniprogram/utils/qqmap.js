@@ -3,5 +3,5 @@ import QQMapWX from '../libs/qqmap-wx-jssdk'
 
 // 实例化位置服务（使用个人申请的 key）
 export default new QQMapWX({
-  key: 'WHBBZ-5ANCC-6FS2A-AKPRL-IFLY2-BOBZZ',
+  key: 'MUVBZ-IAR6G-QISQQ-QDPFB-MK2HK-FCBXF',
 })

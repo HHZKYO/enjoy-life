@@ -20,6 +20,12 @@ Page({
     this.getPoint(latitude, longitude)
   },
 
+  // 重新选择位置
+  async chooseLocation() {
+    const {latitude, longitude} = await wx.chooseLocation()
+    this.getPoint(latitude, longitude)
+  },
+
   getPoint(latitude, longitude) {
     wx.showLoading({
       title: '正在加载...',

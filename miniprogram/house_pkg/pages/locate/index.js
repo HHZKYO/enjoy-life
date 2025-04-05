@@ -5,7 +5,8 @@ import QQMap from '../../../utils/qqmap'
 
 Page({
   data: {
-    points: []
+    points: [],
+    address: ''
   },
   onLoad() {
     this.getLocation()
@@ -20,6 +21,19 @@ Page({
   },
 
   getPoint(latitude, longitude) {
+    wx.showLoading({
+      title: '正在加载...',
+    })
+
+    // 逆地址解析（根据经纬度来获取地址）
+    QQMap.reverseGeocoder({
+      location: [latitude, longitude].join(','),
+      success: ({ result: { address } }) => {
+        // 数据数据
+        this.setData({ address })
+      },
+    })
+    
     // search 是实现地点搜索功能的方法
     QQMap.search({
       keyword: '住宅小区', //搜索关键词
@@ -35,6 +49,9 @@ Page({
       },
       fail: (err) => {
         console.log(err)
+      },
+      complete() {
+        wx.hideLoading()
       }
     })
   }

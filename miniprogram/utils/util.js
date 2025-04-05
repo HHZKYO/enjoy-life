@@ -16,6 +16,7 @@ const utils = {
    */
   isTabBarPage(path = '') {
     // 获取 tabBar 页面信息
+    // eslint-disable-next-line
     const tabBarList = __wxConfig.tabBar.list
 
     // 获取 tabBar 页面的路径

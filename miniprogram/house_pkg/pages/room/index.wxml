@@ -5,7 +5,7 @@
       wx:key="*this"
       title="{{point}}{{building}} {{item}}"
       link-type="navigateTo"
-      url="/house_pkg/pages/form/index"
+      url="/house_pkg/pages/form/index?point={{point}}&building={{building}}&room={{item}}"
       is-link
     />
   </van-cell-group>

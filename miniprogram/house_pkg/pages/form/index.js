@@ -34,11 +34,20 @@ Page({
   onLoad({ point, building, room }) {
     this.setData({ point, building, room })
   },
-  submitForm() {
+  async submitForm() {
     // wx.reLaunch({
     //   url: '/house_pkg/pages/list/index',
     // })
-    this.validate()
+    // 验证数据
+    if (!this.validate()) return;
+    // 获取全部的数据（剔除可能多余参数 __webviewId__）
+    const { __webviewId__, status, ...data } = this.data;
+    // 调用接口
+    const { code } = await wx.http.post("/room", data);
+    // 检测接口是否调用成功
+    if (code !== 10000) return wx.utils.toast("提交数据失败!");
+    // 返回房屋列表页面
+    wx.navigateBack({ delta: 4 });
   },
   async uploadPicture(ev) {
     // 区分用户上传的是正面或反面

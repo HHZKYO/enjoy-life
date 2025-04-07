@@ -1,6 +1,21 @@
 Page({
   data: {
+    houseList: [],
+    isEmpty: false,
     dialogVisible: false,
+  },
+
+  onShow() {
+    this.getHouseList()
+  },
+
+  async getHouseList() {
+    const { code, data: houseList } = await wx.http.get('/room')
+    if (code !== 10000) return wx.utils.toast('获取房屋列表失败')
+    this.setData({
+      houseList,
+      isEmpty: houseList.length === 0,
+    })
   },
 
   swipeClose(ev) {

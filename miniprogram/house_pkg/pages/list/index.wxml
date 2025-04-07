@@ -9,7 +9,7 @@
               <van-cell size="large" title="{{item.point}}">
                 <text wx:if="{{item.status === 1}}" class="tag info">正在审核</text>
                 <text wx:if="{{item.status === 2}}" class="tag success">审核通过</text>
-                <text wx:if="{{item.status === 3}}" class="tag error">审核失败</text>
+                <text wx:if="{{item.status === 3}}" class="tag fail">审核失败</text>
               </van-cell>
               <van-cell title="房间号" border="{{false}}" value="{{item.building}} {{item.room}}" />
               <van-cell title="业主" border="{{false}}" value="{{item.name}}" />

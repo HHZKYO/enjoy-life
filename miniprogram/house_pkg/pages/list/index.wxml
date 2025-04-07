@@ -5,7 +5,7 @@
         <view class="houses-title">房屋信息</view>
         <view class="houses-list">
           <van-swipe-cell wx:for="{{houseList}}" wx:key="id" async-close bind:close="swipeClose" right-width="{{ 70 }}">
-            <van-cell-group bind:tap="goDetail" border="{{false}}">
+            <van-cell-group mark:id="{{item.id}}" bind:tap="goDetail" border="{{false}}">
               <van-cell size="large" title="{{item.point}}">
                 <text wx:if="{{item.status === 1}}" class="tag info">正在审核</text>
                 <text wx:if="{{item.status === 2}}" class="tag success">审核通过</text>

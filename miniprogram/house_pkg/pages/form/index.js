@@ -40,6 +40,22 @@ Page({
     // })
     this.validate()
   },
+  async uploadPicture(ev) {
+    // 上传图片的类型（身份证正面或反面）
+    const type = ev.mark?.type
+    console.log(type)
+    // 打开相册或拍照
+    try {
+      const media = await wx.chooseMedia({
+        count: 1,
+        mediaType: ['image'],
+        sizeType: ['compressed'],
+      })
+      console.log(media)
+    } catch (err) {
+      console.log(err)
+    }
+  },
   removePicture(ev) {
     // 移除图片的类型（身份证正面或反面）
     const type = ev.mark?.type

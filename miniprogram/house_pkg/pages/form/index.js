@@ -12,8 +12,8 @@ Page({
     name: '',
     gender: '1',
     mobile: '',
-    idcardFrontUrl: '/static/images/avatar_1.jpg',
-    idcardBackUrl: '/static/images/avatar_2.jpg',
+    idcardFrontUrl: '',
+    idcardBackUrl: '',
   },
   rules: {
     name: [
@@ -41,19 +41,37 @@ Page({
     this.validate()
   },
   async uploadPicture(ev) {
-    // 上传图片的类型（身份证正面或反面）
-    const type = ev.mark?.type
-    console.log(type)
-    // 打开相册或拍照
+    // 区分用户上传的是正面或反面
+    const type = ev.mark.type;
+
     try {
+      // 打开相册或拍照
       const media = await wx.chooseMedia({
         count: 1,
-        mediaType: ['image'],
-        sizeType: ['compressed'],
-      })
-      console.log(media)
+        mediaType: ["image"],
+        sizeType: ["compressed"],
+      });
+
+      // 调用 API 上传图片
+      wx.uploadFile({
+        url: wx.http.baseURL + "/upload",
+        filePath: media.tempFiles[0].tempFilePath,
+        name: "file",
+        header: {
+          Authorization: "Bearer " + getApp().token,
+        },
+        success: (result) => {
+          // 处理返回的 json 数据
+          const data = JSON.parse(result.data);
+          // 判断接口是否调用成功
+          if (data.code !== 10000) return wx.utils.toast("上传图片失败!");
+          // 渲染数据
+          this.setData({ [type]: data.data.url });
+        },
+      });
     } catch (err) {
-      console.log(err)
+      // 获取图片失败
+      console.log(err);
     }
   },
   removePicture(ev) {

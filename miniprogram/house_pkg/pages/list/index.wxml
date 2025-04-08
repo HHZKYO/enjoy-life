@@ -4,7 +4,15 @@
       <view class="houses">
         <view class="houses-title">房屋信息</view>
         <view class="houses-list">
-          <van-swipe-cell wx:for="{{houseList}}" wx:key="id" async-close bind:close="swipeClose" right-width="{{ 70 }}">
+          <van-swipe-cell
+            wx:for="{{houseList}}"
+            wx:key="id"
+            mark:index="{{index}}"
+            mark:id="{{item.id}}"
+            async-close
+            bind:close="swipeClose"
+            right-width="{{ 70 }}"
+          >
             <van-cell-group mark:id="{{item.id}}" bind:tap="goDetail" border="{{false}}">
               <van-cell size="large" title="{{item.point}}">
                 <text wx:if="{{item.status === 1}}" class="tag info">正在审核</text>

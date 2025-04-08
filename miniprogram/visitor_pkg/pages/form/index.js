@@ -1,5 +1,8 @@
 Page({
   data: {
+    name: '',
+    gender: 1,
+    mobile: '',
     dateLayerVisible: false,
     houseLayerVisible: false,
     houseList: []
@@ -18,6 +21,7 @@ Page({
     this.setData({ houseList })
   },
   // 获取用户选择的房屋
+  // 这是本次该提交的
   selectHouseInfo(ev) {
     // 记录获取的数据
     this.setData({
@@ -25,6 +29,16 @@ Page({
       houseInfo: ev.detail.name,
     })
   },
+
+  // 获取用户选择的日期
+  selectDateInfo(ev) {
+    // 记录获取的时间并隐藏弹层
+    this.setData({
+      visitDate: wx.utils.dataFormat(ev.detail),
+      dateLayerVisible: false,
+    })
+  },
+
   openHouseLayer() {
     this.setData({ houseLayerVisible: true })
   },

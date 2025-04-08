@@ -31,7 +31,7 @@ const utils = {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
-    return [year, month, day].map(item => item > 10 ? item : '0' + item).join('-')
+    return [year, month, day].map(item => item > 9 ? item : '0' + item).join('-')
   }
 }
 

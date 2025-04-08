@@ -40,4 +40,18 @@ Page({
       imageUrl: 'https://enjoy-plus.oss-cn-beijing.aliyuncs.com/images/share_poster.png',
     }
   },
+  // 保存图片
+  async saveQRCode() {
+    try {
+      // 读取图片信息
+      const { path } = await wx.getImageInfo({
+        // 二维码的图片路径
+        src: this.data.passport.url,
+      })
+      // 保存图片到相册
+      wx.saveImageToPhotosAlbum({ filePath: path })
+    } catch (err) {
+      wx.utils.toast('保存图片失败，稍后重试!')
+    }
+  }
 })

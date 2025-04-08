@@ -77,21 +77,21 @@ Page({
     this.setData({ dateLayerVisible: false })
   },
   // 提交表单数据
-  // async goPassport() {
-  //   // 验证表单数据
-  //   if (!this.validate()) return
-  //   // 获取接口需要的数据
-  //   const { name, gender, mobile, houseId, visitDate } = this.data
-  //   // 调用接口
-  //   const {
-  //     code,
-  //     data: { id },
-  //   } = await wx.http.post('/visitor', { name, gender, mobile, houseId, visitDate })
-  //   // 检测接口是否调用成功
-  //   if (code !== 10000) return wx.utils.toast()
-  //   // 跳转到访客详情页面
-  //   wx.reLaunch({
-  //     url: '/visitor_pkg/pages/passport/index?id=' + id,
-  //   })
-  // },
+  async goPassport() {
+    // 验证表单数据
+    if (!this.validate()) return
+    // 获取接口需要的数据
+    const { name, gender, mobile, houseId, visitDate } = this.data
+    // 调用接口
+    const {
+      code,
+      data: { id },
+    } = await wx.http.post('/visitor', { name, gender, mobile, houseId, visitDate })
+    // 检测接口是否调用成功
+    if (code !== 10000) return wx.utils.toast()
+    // 跳转到访客详情页面
+    wx.reLaunch({
+      url: '/visitor_pkg/pages/passport/index?id=' + id,
+    })
+  },
 })

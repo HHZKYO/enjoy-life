@@ -71,5 +71,15 @@ Page({
     wx.navigateTo({
       url: '/repair_pkg/pages/form/index?id=' + ev.mark.id
     })
-  }
+  },
+  async cancelRepair(ev) {
+    // 调用接口
+    const { code } = await wx.http.put('/cancel/repaire/' + ev.mark.id)
+    // 检测接口是否调用成功
+    if (code !== 10000) return wx.utils.toast()
+    // 跳转到报修列表页面
+    wx.navigateTo({
+      url: '/repair_pkg/pages/list/index',
+    })
+  },
 })

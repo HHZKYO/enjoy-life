@@ -44,7 +44,8 @@
     bind:confirm="selectDateInfo"
     type="date"
     value="{{ currentDate }}"
-    min-date="{{ 1664582400000 }}"
+    max-date="{{ maxDate }}"
+    min-date="{{ currentDate }}"
   />
 </van-popup>
 

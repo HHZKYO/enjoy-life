@@ -6,6 +6,10 @@ Page({
     dateLayerVisible: false,
     houseList: [],
     repairItem: [],
+    houseId: '',
+    houseName: '',
+    repairItemId: '',
+    repairItemName: '',
     attachment: [
       { url: '/repair_pkg/static/uploads/attachment.jpg' },
       { url: '/repair_pkg/static/uploads/attachment.jpg' },
@@ -22,6 +26,20 @@ Page({
     const { code, data: houseList } = await wx.http.get('/house');
     if (code !== 10000) return wx.utils.toast();
     this.setData({ houseList });
+  },
+
+  selectHouseInfo(ev) {
+    this.setData({
+      houseId: ev.detail.id,
+      houseName: ev.detail.name,
+    })
+  },
+
+  selectRepairItemInfo(ev) {
+    this.setData({
+      repairItemId: ev.detail.id,
+      repairItemName: ev.detail.name,
+    })
   },
 
   openHouseLayer() {

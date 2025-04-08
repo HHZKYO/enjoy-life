@@ -1,5 +1,5 @@
 <block wx:if="{{!isEmpty}}">
-  <scroll-view show-scrollbar="{{false}}" enhanced scroll-y>
+  <scroll-view bind:scrolltolower="getMoreVisitor" show-scrollbar="{{false}}" enhanced scroll-y>
     <view class="visitor">
       <view class="visitor-title">我的访客</view>
       <view class="visitor-list">

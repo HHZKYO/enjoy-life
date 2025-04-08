@@ -21,9 +21,9 @@ Page({
       isEmpty: repairList.length === 0,
     })
   },
-  goDetail() {
+  goDetail(ev) {
     wx.navigateTo({
-      url: '/repair_pkg/pages/detail/index',
+      url: '/repair_pkg/pages/detail/index?id=' + ev.mark.id,
     })
   },
   addRepair() {

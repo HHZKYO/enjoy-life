@@ -4,7 +4,13 @@
       <view class="repairs">
         <view class="repairs-title">我的报修</view>
         <view class="repairs-list">
-          <van-cell-group wx:for="{{repairList}}" wx:key="id" border="{{false}}" bind:tap="goDetail">
+          <van-cell-group
+            wx:for="{{repairList}}"
+            wx:key="id"
+            border="{{false}}"
+            mark:id="{{item.id}}"
+            bind:tap="goDetail"
+          >
             <van-cell size="large" title="{{item.houseInfo}}">
               <text wx:if="{{item.status === 0}}" class="tag cancel">已取消</text>
               <text wx:if="{{item.status === 1}}" class="tag info">受理中</text>

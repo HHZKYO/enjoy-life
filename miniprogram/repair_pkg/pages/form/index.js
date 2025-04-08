@@ -78,6 +78,33 @@ Page({
   closeDateLayer() {
     this.setData({ dateLayerVisible: false })
   },
+
+  uploadPicture(ev) {
+    // 上传文件的信息
+    const { file } = ev.detail
+    // 调用 API 实现文件上传
+    wx.uploadFile({
+      url: wx.http.baseURL + '/upload',
+      filePath: file.url,
+      name: 'file',
+      header: {
+        Authorization: 'Bearer ' + getApp().token,
+      },
+      success: (result) => {
+        // 处理返回的 json 数据
+        const data = JSON.parse(result.data)
+        // 检测接口是否调用成功
+        if (data.code !== 10000) return wx.utils.toast('文件上传失败!')
+        // 先获取原来已经上传的图片
+        const { attachment } = this.data
+        // 追加新的上传的图片
+        attachment.push(data.data)
+        // 渲染数据
+        this.setData({ attachment })
+      },
+    })
+  },
+
   goList() {
     wx.reLaunch({
       url: '/repair_pkg/pages/list/index',

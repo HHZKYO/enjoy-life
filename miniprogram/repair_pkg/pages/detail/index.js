@@ -67,4 +67,9 @@ Page({
       },
     })
   },
+  editRepair(ev) {
+    wx.navigateTo({
+      url: '/repair_pkg/pages/form/index?id=' + ev.mark.id
+    })
+  }
 })

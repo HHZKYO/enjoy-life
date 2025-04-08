@@ -36,6 +36,6 @@
 </scroll-view>
 
 <view class="toolbar">
-  <view class="button-text active">修改信息</view>
-  <view bind:tap="test" class="button-text">取消报修</view>
+  <view mark:id="{{repairDetail.id}}" bind:tap="editRepair" class="button-text active">修改信息</view>
+  <view mark:id="cancelRepair" bind:tap="cancelRepair" class="button-text">取消报修</view>
 </view>

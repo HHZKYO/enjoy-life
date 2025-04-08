@@ -13,7 +13,7 @@ Page({
     houseList: [],
     repairItem: [],
     houseId: '',
-    houseName: '',
+    houseInfo: '',
     repairItemId: '',
     repairItemName: '',
     attachment: [],
@@ -38,9 +38,22 @@ Page({
     ],
   },
 
-  onLoad() {
+  onLoad({ id }) {
     this.getHouseList();
     this.getRepairItem();
+    // console.log(id)
+    // 如果有id表明是修改操作
+    if (id) this.getRepairDetail(id)
+  },
+
+  // 获取待修改的报修信息
+  async getRepairDetail(id) {
+    // 调用接口
+    const { code, data: repairDetail } = await wx.http.get('/repair/' + id)
+    // 检测是否调用成功
+    if (code !== 10000) return wx.utils.toast()
+    // 渲染数据
+    this.setData({ ...repairDetail })
   },
 
   // 获取房屋列表
@@ -53,7 +66,7 @@ Page({
   selectHouseInfo(ev) {
     this.setData({
       houseId: ev.detail.id,
-      houseName: ev.detail.name,
+      houseInfo: ev.detail.name,
     })
   },
 
@@ -131,9 +144,10 @@ Page({
     // 验证表单数据
     if (!this.validate()) return
     // 提取接口需要的数据
-    const { houseId, repairItemId, mobile, appointment, description, attachment } = this.data
+    const { id, houseId, repairItemId, mobile, appointment, description, attachment } = this.data
     // 调用接口
     const { code } = await wx.http.post('/repair', {
+      id,
       houseId,
       repairItemId,
       mobile,

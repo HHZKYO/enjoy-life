@@ -5,7 +5,7 @@ Page({
     repairLayerVisible: false,
     dateLayerVisible: false,
     houseList: [],
-    repairItem: [{ name: '水路卫浴' }, { name: '电路灯具' }, { name: '管道疏通' }, { name: '开锁换锁' }],
+    repairItem: [],
     attachment: [
       { url: '/repair_pkg/static/uploads/attachment.jpg' },
       { url: '/repair_pkg/static/uploads/attachment.jpg' },
@@ -14,11 +14,12 @@ Page({
 
   onLoad() {
     this.getHouseList();
+    this.getRepairItem();
   },
 
   // 获取房屋列表
   async getHouseList() {
-    const { code, data: houseList } = await wx.http.get("/house");
+    const { code, data: houseList } = await wx.http.get('/house');
     if (code !== 10000) return wx.utils.toast();
     this.setData({ houseList });
   },
@@ -29,6 +30,14 @@ Page({
   closeHouseLayer() {
     this.setData({ houseLayerVisible: false })
   },
+
+  // 获取维修项目
+  async getRepairItem() {
+    const { code, data: repairItem } = await wx.http.get('/repairItem');
+    if (code !== 10000) return wx.utils.toast();
+    this.setData({ repairItem });
+  },
+
   openRepairLayer() {
     this.setData({ repairLayerVisible: true })
   },

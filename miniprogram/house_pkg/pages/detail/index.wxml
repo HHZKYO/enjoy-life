@@ -17,10 +17,10 @@
     <view class="id-card">
       <van-cell title="本人身份证照片" />
       <view class="id-card-front">
-        <image src="{{houseDetail.idCardFrontUrl}}" />
+        <image src="{{houseDetail.idcardFrontUrl}}" />
       </view>
       <view class="id-card-back">
-        <image src="{{houseDetail.idCardBackUrl}}" />
+        <image src="{{houseDetail.idcardBackUrl}}" />
       </view>
     </view>
   </view>

@@ -1,6 +1,6 @@
 <view class="passport">
   <view class="countdown">
-    <van-count-down wx:if="{{passport.validTime > 0}}" time="{{ passport.validTime }}" />
+    <van-count-down wx:if="{{passport.validTime > 0}}" time="{{ passport.validTime * 1000 }}" />
     <view wx:else class="van-count-down">00:00:00</view>
     <view class="label">通行证有效时间</view>
   </view>
@@ -14,7 +14,7 @@
   </view>
 </view>
 
-<view class="toolbar">
+<view class="toolbar" wx:if="{{passport.encryptedData}}">
   <button class="button-share" open-type="share">
     <text class="enjoy-icon icon-share"></text>
     <text class="text">分享给朋友</text>

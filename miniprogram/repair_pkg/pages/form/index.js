@@ -1,6 +1,6 @@
 Page({
   data: {
-    currentDate: new Date().getTime(),
+    currentDate: Date.now(),
     houseLayerVisible: false,
     repairLayerVisible: false,
     dateLayerVisible: false,
@@ -62,6 +62,13 @@ Page({
   closeRepairLayer() {
     this.setData({
       repairLayerVisible: false,
+    })
+  },
+
+  selectDateInfo(ev) {
+    this.setData({
+      appointment: wx.utils.dataFormat(ev.detail),
+      dateLayerVisible: false
     })
   },
 

@@ -3,7 +3,7 @@ const utils = {
    * 消息反馈（轻提示）
    * @param {string} title 文字提示内容
    */
-  toast(title='数据加载失败...') {
+  toast(title = '数据加载失败...') {
     wx.showToast({
       title,
       mask: true,
@@ -20,11 +20,18 @@ const utils = {
     const tabBarList = __wxConfig.tabBar.list
 
     // 获取 tabBar 页面的路径
-    const tabBarPages = tabBarList.map(({pagePath}) => {
+    const tabBarPages = tabBarList.map(({ pagePath }) => {
       return pagePath.split('.')[0]
     })
     // 是否为 tabBar 页面
     return tabBarPages.includes(path)
+  },
+  dataFormat(timestamp) {
+    const date = new Date(timestamp)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    return [year, month, day].map(item => item > 10 ? item : '0' + item).join('-')
   }
 }
 

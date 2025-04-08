@@ -16,10 +16,7 @@ Page({
     houseName: '',
     repairItemId: '',
     repairItemName: '',
-    attachment: [
-      { url: '/repair_pkg/static/uploads/attachment.jpg' },
-      { url: '/repair_pkg/static/uploads/attachment.jpg' },
-    ],
+    attachment: [],
   },
 
   rules: {
@@ -130,7 +127,25 @@ Page({
     })
   },
 
-  submitForm() {
-    this.validate()
+  async submitForm() {
+    // 验证表单数据
+    if (!this.validate()) return
+    // 提取接口需要的数据
+    const { houseId, repairItemId, mobile, appointment, description, attachment } = this.data
+    // 调用接口
+    const { code } = await wx.http.post('/repair', {
+      houseId,
+      repairItemId,
+      mobile,
+      appointment,
+      description,
+      attachment,
+    })
+    // 检测接口是否调用成功
+    if (code !== 10000) return wx.utils.toast('在线报修失败!')
+    // 跳转到报修列表页面
+    wx.redirectTo({
+      url: '/repair_pkg/pages/list/index',
+    })
   },
 })
